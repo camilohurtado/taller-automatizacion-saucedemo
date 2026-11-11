@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Taller Automatizacion - CamiloHurtado</title>
+<style>
+  @page { size: Letter; margin: 20mm 19mm 18mm 19mm;
+    @bottom-right { content: "Página " counter(page); font: 9pt system-ui, sans-serif; color: #777; }
+    @bottom-left { content: "AA2 · Taller de automatización de pruebas funcionales · SauceDemo"; font: 9pt system-ui, sans-serif; color: #777; } }
+  @page :first { @bottom-right { content: none; } @bottom-left { content: none; } }
+  :root { --acento: #1f6f5c; --tinta: #1f2328; --suave: #57606a; --borde: #d8dee4; --fondo: #f6f8fa; }
+  * { box-sizing: border-box; }
+  body { font: 10pt/1.5 -apple-system, "Segoe UI", system-ui, sans-serif; color: var(--tinta); margin: 0; }
+  h2 { font-size: 15pt; color: var(--acento); border-bottom: 2px solid var(--acento); padding-bottom: 4px; margin: 0 0 10px; break-after: avoid; }
+  h3 { font-size: 11.5pt; margin: 14px 0 5px; break-after: avoid; }
+  section.cap { break-before: page; }
+  p { margin: 5px 0 7px; text-align: justify; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 8.8pt; }
+  th, td { border: 1px solid var(--borde); padding: 4px 6px; vertical-align: top; text-align: left; }
+  td:first-child { white-space: nowrap; }
+  th { background: var(--fondo); }
+  tr { break-inside: avoid; }
+  code { font: 8.5pt Menlo, Consolas, monospace; background: var(--fondo); padding: 1px 4px; border-radius: 3px; }
+  pre { font: 7.9pt/1.42 Menlo, Consolas, monospace; background: #1e1f24; color: #e6e6e6; padding: 9px 11px;
+        border-radius: 6px; white-space: pre-wrap; break-inside: avoid; margin: 5px 0 10px; }
+  pre .c { color: #8b949e; } pre .k { color: #ff7b72; } pre .s { color: #a5d6ff; } pre .a { color: #d2a8ff; }
+  figure { margin: 8px 0 10px; break-inside: avoid; text-align: center; }
+  figure img { max-width: 100%; border: 1px solid var(--borde); border-radius: 4px; }
+  figcaption { font-size: 8.4pt; color: var(--suave); margin-top: 3px; }
+  .par { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; break-inside: avoid; }
+  .tri { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; break-inside: avoid; }
+  .par figure, .tri figure { margin: 3px 0; }
+  .nota { border-left: 4px solid var(--acento); background: #edf6f3; padding: 7px 11px; margin: 8px 0; break-inside: avoid; }
+  .ok { color: #1a7f37; font-weight: 600; } .ko { color: #b42318; font-weight: 600; }
+  td.c, th.c { text-align: center; }
+  ol li, ul li { margin: 2px 0; }
+  .portada { height: 238mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .portada .banda { background: var(--acento); color: #fff; padding: 28px 30px; border-radius: 8px; }
+  .portada .banda small { letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .portada h1 { font-size: 25pt; margin: 10px 0 6px; line-height: 1.2; }
+  .portada .datos td { border: 0; padding: 4px 0; font-size: 10.5pt; }
+  .portada .datos td:first-child { color: var(--suave); width: 32%; }
+  .resumen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 22px; }
+  .resumen div { border: 1px solid var(--borde); border-radius: 6px; padding: 10px; }
+  .resumen b { display: block; font-size: 20pt; color: var(--acento); }
+  .resumen span { font-size: 8.5pt; color: var(--suave); }
+  .reflexion p, .reflexion li { font-size: 9.4pt; line-height: 1.42; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ PORTADA -->
+<div class="portada">
+  <div>
+    <div class="banda">
+      <small>Pruebas de Calidad de Software · Actividad AA2 · Caso de estudio</small>
+      <h1>Taller de automatización de pruebas funcionales para una aplicación web</h1>
+      <div>Selenium WebDriver + JUnit 5 sobre SauceDemo (Swag Labs), entorno real de práctica</div>
+    </div>
+    <div class="resumen">
+      <div><b>18</b><span>pruebas funcionales<br>automatizadas (100 % aprobadas)</span></div>
+      <div><b>25</b><span>ejecuciones de regresión<br>por perfil de usuario</span></div>
+      <div><b>7</b><span>defectos detectados<br>automáticamente</span></div>
+      <div><b>6</b><span>Page Objects<br>reutilizables</span></div>
+    </div>
+  </div>
+  <table class="datos">
+    <tr><td>Grupo</td><td><strong>CamiloHurtado</strong></td></tr>
+    <tr><td>Integrantes</td><td>Camilo Andrés Hurtado Carvajal</td></tr>
+    <tr><td>Materia</td><td>Pruebas de Calidad de Software</td></tr>
+    <tr><td>Actividad</td><td>AA2 – Taller: automatización de pruebas funcionales (rúbrica RAA2_U2)</td></tr>
+    <tr><td>Aplicación bajo prueba</td><td>SauceDemo / Swag Labs – https://www.saucedemo.com</td></tr>
+    <tr><td>Herramienta</td><td>Selenium WebDriver 4.33 + JUnit 5.10 (Java 21, Maven)</td></tr>
+    <tr><td>Fecha</td><td>11 de noviembre de 2026</td></tr>
+  </table>
+</div>
+
+<!-- ============================================================ 1 -->
+<section class="cap">
+<h2>1. Introducción y alcance</h2>
+<p>El objetivo del taller es automatizar un conjunto de pruebas funcionales sobre una aplicación web pequeña, registrar las
+evidencias técnicas del proceso y reflexionar sobre el trabajo. A diferencia del taller AA1, que usó el proyecto propio SimpleFood,
+aquí se trabajó sobre una <strong>aplicación real de terceros</strong>, de la que no se conoce ni se puede modificar el código:
+un escenario de prueba de <em>caja negra</em> como el que vive un equipo de QA frente a un sistema entregado por otro equipo.</p>
+
+<h3>Aplicación bajo prueba: SauceDemo (Swag Labs)</h3>
+<p>SauceDemo es una tienda en línea de demostración publicada por Sauce Labs para practicar automatización. Tiene inicio de sesión,
+catálogo de 6 productos, ordenamiento, carrito y compra en tres pasos (datos del cliente, resumen con impuesto y confirmación).
+Publica varios usuarios con la misma clave (<code>secret_sauce</code>). <code>standard_user</code> funciona correctamente,
+<code>locked_out_user</code> está bloqueado y otros cuatro tienen <strong>defectos sembrados a propósito</strong>, lo que permite
+comprobar que una suite automatizada realmente detecta fallas.</p>
+
+<h3>Alcance</h3>
+<table>
+  <tr><th>Funcionalidad</th><th>Qué se verifica</th><th style="width:16%">Casos</th></tr>
+  <tr><td>Autenticación y sesión</td><td>Ingreso válido, cuatro rechazos con su mensaje, acceso directo sin sesión, cierre de sesión.</td><td>CP-LOG-01 a 04</td></tr>
+  <tr><td>Catálogo</td><td>Productos y precios contra un oráculo, cuatro ordenamientos, agregar y quitar con contador del carrito.</td><td>CP-CAT-01 a 03</td></tr>
+  <tr><td>Carrito y compra</td><td>Contenido del carrito, compra completa con cálculo de subtotal, impuesto (8 %) y total, campos obligatorios.</td><td>CP-CAR-01, CP-COM-01 y 02</td></tr>
+  <tr><td>Regresión por perfil</td><td>Cinco controles críticos repetidos con cada perfil de usuario para encontrar defectos.</td><td>DEF-01 a 05</td></tr>
+</table>
+<p><strong>Fuera de alcance:</strong> pruebas de carga, de seguridad, de accesibilidad y el «Dynamic Catalog» que la versión actual del sitio agregó al menú.</p>
+
+<h3>Herramienta y entorno</h3>
+<table>
+  <tr><th>Componente</th><th>Versión</th><th>Uso</th></tr>
+  <tr><td>Selenium WebDriver</td><td>4.33.0</td><td>Automatización del navegador. Selenium Manager descarga el <code>chromedriver</code> compatible.</td></tr>
+  <tr><td>JUnit Jupiter</td><td>5.10.3</td><td>Ciclo de vida, pruebas parametrizadas, etiquetas (<code>@Tag</code>), <code>assertAll</code>, extensiones.</td></tr>
+  <tr><td>Java (Corretto) / Maven</td><td>21.0.8 / 3.9.3</td><td>Lenguaje, dependencias y ejecución (<code>mvn test</code>, perfil <code>defectos</code>).</td></tr>
+  <tr><td>Google Chrome</td><td>157, modo <em>headless</em></td><td>Navegador de ejecución (visible con <code>-Dheadless=false</code>).</td></tr>
+  <tr><td>Git</td><td>—</td><td>Control de versiones con commits por etapa y referencia a la materia.</td></tr>
+</table>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="cap">
+<h2>2. Organización del trabajo en equipo</h2>
+<p>El trabajo se organizó con roles y acuerdos explícitos para que varias personas puedan contribuir a la misma suite sin
+pisarse y con una calidad uniforme.</p>
+<table>
+  <tr><th style="width:20%">Rol</th><th>Responsabilidades</th></tr>
+  <tr><td>Analista de pruebas</td><td>Explorar la aplicación, identificar reglas de negocio, diseñar casos (técnicas de caja negra) y mantener la matriz de casos.</td></tr>
+  <tr><td>Automatizador</td><td>Implementar Page Objects y scripts, mantener la infraestructura (<code>BaseTest</code>, configuración) y las evidencias.</td></tr>
+  <tr><td>Revisor</td><td>Revisar cada cambio con la lista de chequeo, ejecutar la suite localmente y aprobar la integración.</td></tr>
+  <tr><td>Reportero de defectos</td><td>Analizar las fallas, separar defectos de la aplicación de errores del script y redactar los reportes.</td></tr>
+</table>
+
+<h3>Acuerdos de trabajo colaborativo</h3>
+<ul>
+  <li><strong>Control de versiones:</strong> rama <code>main</code> siempre en verde; cada funcionalidad en una rama
+      <code>feature/&lt;nombre&gt;</code>; integración por <em>pull request</em> con al menos una revisión.</li>
+  <li><strong>Commits pequeños y por etapa</strong> (estructura → Page Objects → pruebas → regresión → documentación), en imperativo
+      y con referencia a la materia, para que la historia cuente el proceso (Figura 1).</li>
+  <li><strong>Separación de responsabilidades en el código</strong> para evitar conflictos: los analistas modifican datos y casos
+      (<code>datos/</code>, <code>pruebas/</code>) y los automatizadores las páginas (<code>paginas/</code>).</li>
+  <li><strong>Definición de «hecho» de un caso:</strong> tiene id y <code>@DisplayName</code>, usa Page Objects (sin localizadores en
+      la prueba), deja evidencia y pasa tres ejecuciones seguidas (sin intermitencia).</li>
+</ul>
+
+<h3>Lista de chequeo para la revisión entre pares</h3>
+<table>
+  <tr><th style="width:5%">#</th><th>Criterio</th></tr>
+  <tr><td>1</td><td>¿Cada prueba verifica una sola regla y su nombre describe el comportamiento esperado?</td></tr>
+  <tr><td>2</td><td>¿Usa esperas explícitas? ¿No hay <code>Thread.sleep</code>?</td></tr>
+  <tr><td>3</td><td>¿Los localizadores usan <code>data-test</code> o <code>id</code> y están solo en los Page Objects?</td></tr>
+  <tr><td>4</td><td>¿El resultado esperado viene de un oráculo independiente y no de la misma pantalla?</td></tr>
+  <tr><td>5</td><td>¿La prueba es independiente (navegador propio, sin depender del orden de ejecución)?</td></tr>
+  <tr><td>6</td><td>¿Los mensajes de las aserciones permiten entender la falla sin depurar?</td></tr>
+</table>
+<figure><img src="evidencias/consola_03_git_log.png" style="max-width:80%"><figcaption>Figura 1. Historia de commits por etapa; cada mensaje referencia la materia Pruebas de Calidad de Software.</figcaption></figure>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="cap">
+<h2>3. Guía paso a paso del trabajo</h2>
+<h3>Paso 1 – Preparar el entorno</h3>
+<pre>git clone &lt;repositorio&gt; taller-automatizacion-saucedemo &amp;&amp; cd taller-automatizacion-saucedemo
+java -version      <span class="c"># 21</span>
+mvn -v             <span class="c"># 3.9+</span>
+<span class="c"># No se instala chromedriver: Selenium Manager lo descarga según la versión de Chrome.</span></pre>
+<h3>Paso 2 – Explorar la aplicación y su DOM</h3>
+<p>Se recorrió manualmente el flujo completo. Luego, con un script exploratorio temporal (una «sonda» en Selenium), se listaron los
+atributos <code>data-test</code> de cada pantalla. Así se confirmó que SauceDemo expone localizadores estables
+(<code>username</code>, <code>login-button</code>, <code>inventory-item</code>, <code>subtotal-label</code>, <code>finish</code>…) y se
+registraron los textos exactos de error y el impuesto (29,99 → 2,40, es decir 8 %). La sonda se eliminó después de usarla.</p>
+<h3>Paso 3 – Diseñar los casos (antes de programar)</h3>
+<ul>
+  <li><strong>Partición de equivalencias:</strong> ingreso válido / bloqueado / clave errada / usuario vacío / clave vacía.</li>
+  <li><strong>Tablas de decisión:</strong> los tres campos obligatorios del pago (un campo vacío por caso).</li>
+  <li><strong>Pruebas de escenario:</strong> el flujo de compra de inicio a fin.</li>
+  <li><strong>Oráculos independientes:</strong> catálogo esperado con precios (<code>Producto</code>), ordenamiento calculado por Java y
+      totales recalculados por la prueba con <code>BigDecimal</code>.</li>
+  <li><strong>Pruebas de regresión por perfil:</strong> los mismos controles con cada usuario, tomando a <code>standard_user</code> como grupo de control.</li>
+</ul>
+<h3>Paso 4 – Diseñar la arquitectura de la suite</h3>
+<pre>src/test/java/co/edu/pruebas/saucedemo/
+├── base/     BaseTest (navegador por prueba, capturas, captura en fallo) · Config (config.properties / -D)
+├── datos/    Usuario · Producto (oráculo de precios) · Cliente · Orden
+├── paginas/  PaginaBase (esperas, data-test, encabezado común: carrito y cerrar sesión)
+│             LoginPage · InventarioPage · CarritoPage · CheckoutInfoPage · CheckoutResumenPage · CompraCompletaPage
+└── pruebas/  LoginTest · CatalogoTest · CompraTest · RegresionPorUsuarioTest (@Tag("defectos"))
+
+  Prueba ──usa──▶ Page Object ──WebDriver──▶ Chrome ──HTTPS──▶ www.saucedemo.com
+     │                └─ cada acción devuelve la siguiente página (navegación fluida y tipada)
+     └─ datos/ aporta entradas y resultados esperados</pre>
+<h3>Paso 5 – Implementar, ejecutar y analizar</h3>
+<p>Se implementaron las páginas y luego las pruebas por funcionalidad. Se ejecutó la suite funcional (<code>mvn test</code>) hasta
+quedar en verde y estable, y después la regresión por perfil (<code>mvn test -Pdefectos</code>). Cada falla se analizó con la
+captura automática para decidir si era un defecto de la aplicación o un error del script.</p>
+<table>
+  <tr><th>Comando</th><th>Resultado</th></tr>
+  <tr><td><code>mvn test</code></td><td>Suite funcional, 18 ejecuciones con <code>standard_user</code>. Debe quedar en verde.</td></tr>
+  <tr><td><code>mvn test -Pdefectos</code></td><td>Regresión por perfil, 25 ejecuciones. Se espera que falle con los usuarios defectuosos.</td></tr>
+  <tr><td><code>mvn test -Dheadless=false</code></td><td>Igual, pero mostrando el navegador (útil para demostraciones).</td></tr>
+  <tr><td><code>mvn test -Dtest=CompraTest</code></td><td>Una sola clase de pruebas.</td></tr>
+</table>
+</section>
+
+<!-- ============================================================ 4 -->
+<section style="margin-top:18px">
+<h2>4. Casos de prueba automatizados</h2>
+<table>
+  <tr><th>Id</th><th style="width:27%">Caso</th><th>Datos / acciones</th><th>Resultado esperado</th><th>Estado</th></tr>
+  <tr><td>CP-LOG-01</td><td>Ingreso válido</td><td>standard_user / secret_sauce</td><td>Llega a <code>/inventory.html</code>, título «Products», 6 productos.</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-LOG-02 [1–4]</td><td>Ingreso rechazado (parametrizado)</td><td>Bloqueado · clave errada · usuario vacío · clave vacía</td><td>Mensaje exacto de cada caso; permanece en la página de ingreso.</td><td class="ok">4/4</td></tr>
+  <tr><td>CP-LOG-03</td><td>Acceso sin sesión</td><td>Abrir <code>/inventory.html</code> directamente</td><td>«You can only access '/inventory.html' when you are logged in.»</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-LOG-04</td><td>Cerrar sesión</td><td>Menú → Logout → botón «atrás»</td><td>Vuelve al ingreso; volver atrás no muestra el catálogo.</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-CAT-01</td><td>Productos y precios</td><td>Catálogo vs. oráculo <code>Producto</code></td><td>6 productos, cada uno con su precio esperado.</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-CAT-02 [1–4]</td><td>Ordenamientos (parametrizado)</td><td>A–Z, Z–A, precio ↑, precio ↓</td><td>La lista mostrada es igual a la lista ordenada por Java.</td><td class="ok">4/4</td></tr>
+  <tr><td>CP-CAT-03</td><td>Agregar y quitar</td><td>+Backpack +Bike Light, −Backpack</td><td>Contador 2 → 1; botón «Remove» ↔ «Add to cart».</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-CAR-01</td><td>Carrito</td><td>3 productos, quitar Fleece Jacket, seguir comprando</td><td>Lista exacta en orden; contador 2; conserva el contenido al volver.</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-COM-01</td><td>Compra completa</td><td>Backpack + Bike Light + Bolt T-Shirt</td><td>Subtotal 55,97; impuesto 4,48 (8 %); total 60,45; «Thank you for your order!»; carrito vacío.</td><td class="ok">Aprobado</td></tr>
+  <tr><td>CP-COM-02 [1–3]</td><td>Datos obligatorios (parametrizado)</td><td>Sin nombre · sin apellido · sin código postal</td><td>Mensaje «Error: … is required»; no avanza al resumen.</td><td class="ok">3/3</td></tr>
+</table>
+<p><strong>Total:</strong> 10 casos, que suman 18 ejecuciones gracias a la parametrización: <span class="ok">18 aprobadas, 0 fallidas</span>, en unos 45 s.</p>
+
+<div style="break-inside:avoid">
+<h3>Controles de la regresión por perfil (<code>@Tag("defectos")</code>)</h3>
+<table>
+  <tr><th>Id</th><th>Control</th><th>Criterio de aceptación</th></tr>
+  <tr><td>DEF-01</td><td>Imágenes del catálogo</td><td>Las 6 imágenes son distintas.</td></tr>
+  <tr><td>DEF-02</td><td>Precios del catálogo</td><td>Cada precio coincide con el oráculo.</td></tr>
+  <tr><td>DEF-03</td><td>Ordenar por precio ↑</td><td>La lista queda ordenada y no aparecen alertas.</td></tr>
+  <tr><td>DEF-04</td><td>Compra de un producto</td><td>Llega a «Thank you for your order!».</td></tr>
+  <tr><td>DEF-05</td><td>Tiempo de ingreso</td><td>Menos de 3 segundos desde el clic en «Login» hasta ver el catálogo.</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ============================================================ 5 -->
+<section style="margin-top:18px">
+<h2>5. Scripts automatizados (código relevante)</h2>
+<h3>5.1 Page Object con navegación fluida</h3>
+<p>Cada acción que cambia de pantalla devuelve el Page Object de la siguiente. Así el compilador guía el flujo y la prueba se lee
+como el caso de uso.</p>
+<pre><span class="k">public class</span> LoginPage <span class="k">extends</span> PaginaBase {
+    <span class="k">private static final</span> By USUARIO = dataTest(<span class="s">"username"</span>);   <span class="c">// [data-test="username"]</span>
+    <span class="k">private static final</span> By CLAVE   = dataTest(<span class="s">"password"</span>);
+    <span class="k">private static final</span> By BOTON   = dataTest(<span class="s">"login-button"</span>);
+    <span class="k">private static final</span> By ERROR   = dataTest(<span class="s">"error"</span>);
+
+    <span class="c">/** Camino feliz: ingresa y devuelve el catalogo (espera a que cargue). */</span>
+    <span class="k">public</span> InventarioPage ingresarComo(Usuario usuario) {
+        intentarIngreso(usuario.nombre(), Usuario.CLAVE);
+        <span class="k">return new</span> InventarioPage(driver).esperarCarga();
+    }
+    <span class="c">/** Ingreso que puede fallar: permanece en esta pagina. */</span>
+    <span class="k">public</span> LoginPage intentarIngreso(String usuario, String clave) { ... }
+    <span class="k">public</span> String mensajeError() { <span class="k">return</span> visible(ERROR).getText(); }
+}</pre>
+
+<h3>5.2 Prueba de compra completa con oráculo independiente</h3>
+<pre><span class="a">@Test</span>
+<span class="a">@DisplayName</span>(<span class="s">"CP-COM-01 Compra completa: totales correctos (impuesto 8 %) y confirmacion"</span>)
+<span class="k">void</span> compraCompleta() {
+    List&lt;Producto&gt; compra = List.of(Producto.MORRAL, Producto.LUZ_BICICLETA, Producto.CAMISETA_BOLT);
+    InventarioPage catalogo = ingresar();
+    compra.forEach(catalogo::agregar);
+
+    CheckoutResumenPage resumen = catalogo.irAlCarrito().pagar().llenar(Cliente.valido()).continuar();
+    capturar(<span class="s">"resumen"</span>);
+
+    <span class="c">// Oraculo independiente: se calcula con los precios del catalogo esperado, no con los de la pantalla</span>
+    BigDecimal subtotal = compra.stream().map(Producto::precio).reduce(BigDecimal.ZERO, BigDecimal::add);
+    BigDecimal impuesto = subtotal.multiply(TASA_IMPUESTO).setScale(2, RoundingMode.HALF_UP);
+    assertAll(
+        () -&gt; assertEquals(compra.stream().map(Producto::nombre).toList(), resumen.productos()),
+        () -&gt; assertEquals(subtotal, resumen.subtotal(), <span class="s">"Subtotal"</span>),
+        () -&gt; assertEquals(impuesto, resumen.impuesto(), <span class="s">"Impuesto"</span>),
+        () -&gt; assertEquals(subtotal.add(impuesto), resumen.total(), <span class="s">"Total"</span>));
+
+    CompraCompletaPage confirmacion = resumen.finalizar();
+    assertEquals(<span class="s">"Thank you for your order!"</span>, confirmacion.encabezado());
+    assertEquals(0, confirmacion.cantidadEnCarrito(), <span class="s">"El carrito debe quedar vacio"</span>);
+}</pre>
+
+<h3>5.3 Prueba guiada por datos</h3>
+<pre><span class="a">@ParameterizedTest</span>(name = <span class="s">"[{index}] {3}"</span>)
+<span class="a">@CsvSource</span>(delimiter = <span class="s">'|'</span>, nullValues = <span class="s">"NULO"</span>, textBlock = <span class="s">"""
+    locked_out_user | secret_sauce  | Epic sadface: Sorry, this user has been locked out.                       | Usuario bloqueado
+    standard_user   | clave_erronea | Epic sadface: Username and password do not match any user in this service | Clave incorrecta
+    NULO            | secret_sauce  | Epic sadface: Username is required                                        | Usuario vacio
+    standard_user   | NULO          | Epic sadface: Password is required                                        | Clave vacia
+    """</span>)
+<span class="k">void</span> ingresoRechazado(String usuario, String clave, String mensajeEsperado, String caso) {
+    LoginPage login = <span class="k">new</span> LoginPage(driver).abrir().intentarIngreso(usuario, clave);
+    assertAll(() -&gt; assertEquals(mensajeEsperado, login.mensajeError()),
+              () -&gt; assertTrue(login.estaVisible(), <span class="s">"Debe permanecer en la pagina de ingreso"</span>));
+}</pre>
+
+<h3>5.4 Evidencia automática al fallar</h3>
+<p><code>AfterTestExecutionCallback</code> se ejecuta después de la prueba y <em>antes</em> de <code>@AfterEach</code>, cuando el
+navegador aún está abierto. Así toda falla deja su captura <code>*_FALLO.png</code> sin código adicional en las pruebas.</p>
+<pre><span class="a">@RegisterExtension</span>
+<span class="k">final</span> AfterTestExecutionCallback capturaEnFallo = contexto -&gt; {
+    <span class="k">if</span> (contexto.getExecutionException().isPresent() &amp;&amp; driver != <span class="k">null</span>) {
+        <span class="k">try</span> { driver.switchTo().alert().dismiss(); }   <span class="c">// una alerta abierta impide la captura</span>
+        <span class="k">catch</span> (NoAlertPresentException sinAlerta) { }
+        capturar(<span class="s">"FALLO"</span>);
+    }
+};</pre>
+
+<h3>5.5 Regresión por perfil: misma prueba, distintos usuarios</h3>
+<pre><span class="a">@ParameterizedTest</span>(name = <span class="s">"[{index}] {0}"</span>)
+<span class="a">@EnumSource</span>(value = Usuario.<span class="k">class</span>, names = <span class="s">"BLOQUEADO"</span>, mode = EnumSource.Mode.EXCLUDE)
+<span class="a">@DisplayName</span>(<span class="s">"DEF-03 Ordenar por precio de menor a mayor"</span>)
+<span class="k">void</span> ordenarPorPrecio(Usuario usuario) {
+    List&lt;BigDecimal&gt; precios = ingresar(usuario).ordenarPor(Orden.PRECIO_MENOR_A_MAYOR).precios();
+    assertEquals(precios.stream().sorted().toList(), precios, <span class="s">"El catalogo no quedo ordenado por precio"</span>);
+}</pre>
+</section>
+
+<!-- ============================================================ 6 -->
+<section class="cap">
+<h2>6. Evidencias de la suite funcional</h2>
+<figure><img src="evidencias/consola_01_mvn_test.png" style="max-width:88%"><figcaption>Figura 2. <code>mvn test</code>: 18 pruebas, 0 fallas. El árbol muestra el <code>@DisplayName</code> y el tiempo de cada caso, tomados del reporte de Surefire.</figcaption></figure>
+<p>Capturas tomadas automáticamente por los scripts (<code>BaseTest.capturar</code>) durante la ejecución:</p>
+<div class="tri">
+  <figure><img src="evidencias/f01_ingreso.png"><figcaption>Fig. 3. CP-LOG-01: página de ingreso.</figcaption></figure>
+  <figure><img src="evidencias/f02_usuario_bloqueado.png"><figcaption>Fig. 4. CP-LOG-02 [1]: usuario bloqueado.</figcaption></figure>
+  <figure><img src="evidencias/f03_acceso_sin_sesion.png"><figcaption>Fig. 5. CP-LOG-03: acceso sin sesión.</figcaption></figure>
+</div>
+<div class="tri">
+  <figure><img src="evidencias/f04_orden_precio.png"><figcaption>Fig. 6. CP-CAT-02 [3]: orden por precio ↑.</figcaption></figure>
+  <figure><img src="evidencias/f05_dos_agregados.png"><figcaption>Fig. 7. CP-CAT-03: contador en 2 y botón «Remove».</figcaption></figure>
+  <figure><img src="evidencias/f06_carrito.png"><figcaption>Fig. 8. CP-CAR-01: carrito con 3 productos.</figcaption></figure>
+</div>
+<div class="tri">
+  <figure><img src="evidencias/f09_apellido_obligatorio.png"><figcaption>Fig. 9. CP-COM-02 [2]: apellido obligatorio.</figcaption></figure>
+  <figure><img src="evidencias/f07_resumen_totales.png"><figcaption>Fig. 10. CP-COM-01: resumen (55,97 + 4,48 = 60,45).</figcaption></figure>
+  <figure><img src="evidencias/f08_confirmacion.png"><figcaption>Fig. 11. CP-COM-01: compra confirmada.</figcaption></figure>
+</div>
+</section>
+
+<!-- ============================================================ 7 -->
+<section class="cap">
+<h2>7. Regresión por perfil de usuario: defectos detectados</h2>
+<p>Los mismos cinco controles se ejecutaron con los cinco perfiles que pueden ingresar. <code>standard_user</code> es el
+<strong>grupo de control</strong>: si pasa todos los controles, una falla con otro perfil indica un defecto de la aplicación y no un
+error del script.</p>
+<table>
+  <tr><th>Control</th><th class="c">standard_user</th><th class="c">problem_user</th><th class="c">performance_glitch_user</th><th class="c">error_user</th><th class="c">visual_user</th></tr>
+  <tr><td>DEF-01 Imágenes distintas</td><td class="c ok">✔</td><td class="c ko">✘ BUG-01</td><td class="c ok">✔</td><td class="c ok">✔</td><td class="c ok">✔</td></tr>
+  <tr><td>DEF-02 Precios correctos</td><td class="c ok">✔</td><td class="c ok">✔</td><td class="c ok">✔</td><td class="c ok">✔</td><td class="c ko">✘ BUG-06</td></tr>
+  <tr><td>DEF-03 Ordenar por precio</td><td class="c ok">✔</td><td class="c ko">✘ BUG-02</td><td class="c ok">✔</td><td class="c ko">✘ BUG-04</td><td class="c ko">✘ BUG-06</td></tr>
+  <tr><td>DEF-04 Compra completa</td><td class="c ok">✔</td><td class="c ko">✘ BUG-03</td><td class="c ok">✔</td><td class="c ko">✘ BUG-05</td><td class="c ok">✔</td></tr>
+  <tr><td>DEF-05 Ingreso &lt; 3 s</td><td class="c ok">✔ 1,9 s</td><td class="c ok">✔</td><td class="c ko">✘ BUG-07</td><td class="c ok">✔</td><td class="c ok">✔</td></tr>
+</table>
+<figure><img src="evidencias/consola_02_mvn_test_defectos.png"><figcaption>Figura 12. <code>mvn test -Pdefectos</code>: 25 ejecuciones, 5 fallas de aserción y 3 errores (tiempos de espera agotados y una alerta inesperada). Cada mensaje identifica la causa.</figcaption></figure>
+
+<h3>Reportes de defectos</h3>
+<table>
+  <tr><th>Id</th><th style="width:15%">Perfil</th><th>Descripción y evidencia</th><th style="width:11%">Severidad</th></tr>
+  <tr><td>BUG-01</td><td>problem_user</td><td>Los 6 productos muestran la misma imagen (<code>sl-404.jpg</code>). Esperado: 6 imágenes distintas; obtenido: 1 (Fig. 13).</td><td>Media</td></tr>
+  <tr><td>BUG-02</td><td>problem_user</td><td>«Price (low to high)» no reordena: queda [29.99, 9.99, 15.99, 49.99, 7.99, 15.99].</td><td>Media</td></tr>
+  <tr><td>BUG-03</td><td>problem_user</td><td>Lo que se escribe en «Last Name» se escribe en «First Name»: el apellido queda vacío y la compra no puede continuar (Fig. 14).</td><td class="ko">Crítica</td></tr>
+  <tr><td>BUG-04</td><td>error_user</td><td>Al ordenar aparece la alerta «Sorting is broken! This error has been reported to Backtrace.» y el orden no cambia.</td><td>Media</td></tr>
+  <tr><td>BUG-05</td><td>error_user</td><td>El botón «Finish» del resumen no responde: la compra nunca se confirma (Fig. 15).</td><td class="ko">Crítica</td></tr>
+  <tr><td>BUG-06</td><td>visual_user</td><td>Los precios no corresponden a los reales y cambian entre cargas (Backpack $18,69 frente a $29,99). El orden por precio queda incoherente y el ícono del carrito aparece desplazado (Fig. 16).</td><td>Alta</td></tr>
+  <tr><td>BUG-07</td><td>performance_glitch_user</td><td>El ingreso tarda 5 335 ms, por encima del umbral de 3 000 ms (<code>standard_user</code>: unos 1 900 ms).</td><td>Media</td></tr>
+</table>
+<div class="par">
+  <figure><img src="evidencias/d01_problem_imagenes.png"><figcaption>Fig. 13. BUG-01: imagen repetida (captura automática de la falla).</figcaption></figure>
+  <figure><img src="evidencias/d02_problem_apellido.png"><figcaption>Fig. 14. BUG-03: el apellido se escribe en el nombre («o») y queda vacío.</figcaption></figure>
+</div>
+<div class="par">
+  <figure><img src="evidencias/d04_error_finalizar.png"><figcaption>Fig. 15. BUG-05: tras 10 s en el resumen, «Finish» no avanzó.</figcaption></figure>
+  <figure><img src="evidencias/d03_visual_precios.png"><figcaption>Fig. 16. BUG-06: precios alterados e ícono del carrito desplazado.</figcaption></figure>
+</div>
+<div class="nota"><strong>Lectura de los resultados.</strong> La suite no tiene ninguna prueba escrita «para» un defecto concreto:
+son controles genéricos de comportamiento esperado. Aun así detectó los 7 defectos, y cada falla trae un mensaje y una captura que
+bastan para reportarla. Eso demuestra que los scripts aportan valor en una regresión real y no solo en el caso feliz.</div>
+</section>
+
+<!-- ============================================================ 8 -->
+<section class="cap reflexion">
+<h2>8. Reflexión grupal</h2>
+<p><strong>Sobre la herramienta.</strong> Selenium con JUnit 5 resultó adecuado para pruebas funcionales de caja negra: no hizo
+falta conocer el código de SauceDemo, solo su comportamiento observable. Lo que más pesó en la calidad de los scripts no fue la
+herramienta en sí, sino las decisiones de diseño. Los Page Objects concentraron los localizadores en un solo lugar. Las esperas
+explícitas eliminaron la intermitencia: ninguna prueba falló de forma aleatoria en las ejecuciones repetidas. Y los oráculos
+independientes evitaron el error clásico de comparar la pantalla consigo misma.</p>
+<p><strong>Sobre el valor de automatizar.</strong> Recorrer a mano los 10 casos funcionales toma de 15 a 20 minutos y repetirlos con
+cinco perfiles de usuario lo multiplica. La suite lo hace en menos de tres minutos y deja evidencias sin esfuerzo adicional.
+Lo más revelador fue la regresión por perfil: los mismos cinco controles, sin cambiar una línea, encontraron 7 defectos, dos de
+ellos críticos porque impiden comprar. Una revisión manual rápida que use siempre el usuario «bueno» no los habría visto.</p>
+<p><strong>Sobre las dificultades.</strong> Varias decisiones salieron de problemas reales durante el trabajo:</p>
+<ul>
+  <li>Chrome mostraba un aviso de «contraseña filtrada» tras el ingreso, porque la clave es pública. Se desactivó con preferencias
+      del navegador; si no, habría bloqueado las pruebas de forma intermitente.</li>
+  <li>Al ejecutar las clases en paralelo, el reporte de Maven asignaba mal los conteos por clase. Se prefirió la ejecución secuencial,
+      porque las evidencias deben ser exactas.</li>
+  <li>Algunos defectos se manifiestan como alertas de JavaScript, que impiden tomar capturas. La extensión de captura en fallo se
+      ajustó para cerrarlas primero.</li>
+  <li>No toda falla roja es un defecto de la aplicación. El grupo de control (<code>standard_user</code>) fue la herramienta para
+      distinguir un defecto del sitio de un error del script.</li>
+</ul>
+<p><strong>Sobre la colaboración.</strong> La calidad del software es una responsabilidad compartida. Separar roles (analizar,
+automatizar, revisar, reportar), acordar convenciones (ids de caso, nombres, <code>data-test</code>, ramas) y revisar cada cambio
+con una lista de chequeo hace que la suite sea mantenible por cualquier integrante y no solo por quien la escribió. Los commits
+pequeños por etapa permitieron revisar y entender el avance paso a paso. Una suite automatizada también es documentación viva:
+los <code>@DisplayName</code> y la matriz de casos describen qué hace el sistema mejor que un documento que nadie actualiza.</p>
+<p><strong>Límites y siguientes pasos.</strong> Las pruebas de interfaz son más lentas y frágiles que las unitarias o de API, y dependen
+de un sitio externo que podría cambiar (de hecho, la versión actual ya incluye un «Dynamic Catalog»). Como mejoras se proponen
+ejecutar la suite en integración continua (GitHub Actions) en cada <em>pull request</em>, ejecutar en paralelo con un reporte
+compatible, agregar pruebas en Firefox y Edge, e incorporar pruebas visuales y de accesibilidad, que Selenium por sí solo no cubre
+(BUG-06 solo se detectó por los precios, no por el desplazamiento visual del ícono).</p>
+
+<h2 style="margin-top:16px">9. Conclusiones y referencias</h2>
+<ul>
+  <li>Se automatizaron 10 casos funcionales (18 ejecuciones) sobre una aplicación web real con Selenium + JUnit 5. Todos aprobaron con el usuario estándar.</li>
+  <li>La regresión por perfil (25 ejecuciones) detectó 7 defectos reales, cada uno con mensaje y captura automática como evidencia.</li>
+  <li>El diseño (Page Objects, datos separados, oráculos independientes, esperas explícitas, evidencia automática) hace la suite legible, mantenible y colaborativa.</li>
+</ul>
+<p style="font-size:8.6pt"><strong>Referencias:</strong> Selenium Project, <em>WebDriver documentation</em> y <em>Page Object Models</em>
+(selenium.dev/documentation) · JUnit Team, <em>JUnit 5 User Guide</em> (junit.org/junit5) · Sauce Labs, <em>Swag Labs demo</em>
+(saucedemo.com) · ISTQB, <em>Certified Tester Foundation Level Syllabus v4.0</em> · Apache Maven, <em>Surefire: filtering by tags</em>.</p>
+</section>
+
+</body>
+</html>
